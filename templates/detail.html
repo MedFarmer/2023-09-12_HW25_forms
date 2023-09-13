@@ -7,12 +7,14 @@
         <tr> 
             <th> ID </th>
             <th> Student Name </th>
+            <th> Student Lastname </th>
             <th> Student Grade </th>
         </tr>
         <tr> 
-            <th> {{ student_details.pk }} </th>   
-            <th> {{ student_details.name }} </th>
-            <th> {{ student_details.grade }} </th>
+            <td> {{ student_details.pk }} </td>
+            <td> {{ student_details.name }} </td>   
+            <td> {{ student_details.lastname }} </td>
+            <td> {{ student_details.grade }} </td>
         </tr>  
     </table>
 {% endblock %}

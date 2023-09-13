@@ -1,10 +1,9 @@
-from django.http import HttpResponse
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, FormView
-from .models import Student, User
-from .forms import StudentForm
+
+from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
+from .models import *
 from django.urls import reverse_lazy
 from django.forms import ModelForm, PasswordInput, DateField
+from django import forms
 
 class StudentList(ListView):
     model = Student
@@ -34,19 +33,6 @@ class StudentDelete(DeleteView):
     success_url = reverse_lazy('home')
     context_object_name = 'name'    
 
-class StudentCreate(FormView):
-    template_name = 'add.html'
-    form_class = StudentForm
-    success_url = reverse_lazy('home')
-
-    def form_valid(self, form):
-        name = form.cleaned_data['name']
-        grade = form.cleaned_data['grade']
-        adding = Student(name=name, grade=grade)
-        adding.save()
-
-        return super().form_valid(form)
-
 class StudentUpdate(UpdateView):
     model = Student
     template_name = 'update.html'
@@ -65,7 +51,18 @@ class UserForm(ModelForm):
 class Signup(CreateView):
     form_class = UserForm
     template_name = 'signup.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('home')    
+
+class StudentForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = ('name', 'lastname', 'grade')
+
+class StudentCreate(CreateView):
+    form_class = StudentForm
+    template_name = 'add.html'
+    success_url = reverse_lazy('home')    
+
 
 
 

@@ -3,7 +3,8 @@ from django.contrib.auth.models import AbstractUser
 
 
 class Student(models.Model):
-    name = models.CharField(max_length=30)    
+    name = models.CharField(max_length=30)
+    lastname = models.CharField(max_length=30)
     grade = models.IntegerField()
     
     def __str__(self):
